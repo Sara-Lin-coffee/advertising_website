@@ -1,0 +1,411 @@
+@use 'reset_css';
+@use 'basic_setting';
+
+%input-style {
+  //block
+  border: 1px solid basic_setting.$light-gray;
+  border-radius: 5px;
+  padding: 0.5em;
+  //content
+  font-size: 16px;
+
+  //animation
+  &:hover,
+  &:focus {
+    border-color: basic_setting.$dark-gray;
+  }
+}
+
+#main-app{
+  //positioning
+  display: flex;
+  //block
+  height: 100%;
+}
+
+.user-center-wrapper{
+  //block
+  width: 60px;
+  //content
+  background-color: basic_setting.$dark-gray;
+
+  .text-center{
+    //block
+    margin: 0.5rem 0;
+    //content
+    color:basic_setting.$white;
+    font-size: 12px;
+  }
+
+  .fa-ad{
+    //content
+    color:basic_setting.$white;
+    font-size: 18px;
+  }
+
+  .fa-user-circle{
+    //block
+    margin: 0.5rem 0;
+    //content
+    color: basic_setting.$white;
+    font-size: 18px;
+  }
+}
+
+#main-content{
+  //positioning
+  display: flex;
+  //block
+  height: 100%;
+  width: 100%;
+}
+
+//----card-list-panel-----
+
+.card-list-panel {
+  //positioning
+  z-index: 20;
+  //block
+  height: 100%;
+  flex: 0 0 250px;
+  background-color: white;
+  @extend %standard-boxshadow;
+  overflow-y: scroll;
+
+  .scrollbar{
+    //block
+    padding-left: 6px;
+    //滾軸
+    &::-webkit-scrollbar{
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+  }
+
+  .card{
+    //block
+    width: 200px;
+    margin-top: 16px;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    //content
+    font-size: 14px;
+    opacity: 0.5;
+    //animation
+    cursor: pointer;
+    &:hover, &.active{
+      opacity: 1;
+    }
+    &.active{
+      border-color: basic_setting.$light-gray;
+    }
+
+    .flex-row {
+      display: flex;
+      align-items: center;
+
+      .fa-youtube {
+        color: red;
+        padding-right: 1px;
+      }
+    
+      .fa-facebook-square {
+        color: blue;
+        padding-right: 5px;
+      }
+    
+      .fa-instagram {
+        color: purple;
+        padding-right: 6px;
+      }
+    }
+  }
+}
+
+
+//----right-content-----
+
+.right-content {
+  //positioning
+  display: flex;
+  flex-direction: column;
+  //block
+  flex: 1;
+
+  .container {
+    //block
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+//stepper-panel
+.stepper-panel{
+  //block
+  height: 120px;
+
+  .stepper-container{
+    //positioning
+    display: flex;
+    //block
+    padding-top: 40px;
+  }
+
+  .step{
+    //positioning
+    position: relative;
+    //block
+    flex: 1;
+    text-align: center;
+    //animation
+    @include basic_setting.getStepNums(3);
+
+    .circle-container{
+      //block
+      height: 24px;
+      width: 24px;
+      margin: 0 auto;
+      //content
+      background-color: basic_setting.$light-gray;
+      border-radius: 50%;
+      color: basic_setting.$dark-gray;
+    }
+    .label-container{
+      //block
+      margin-top: 10px;
+      //content
+      color: basic_setting.$dark-gray;
+    }
+
+    .connect-line{
+      display: block;
+      height: 1px;
+    
+      position: absolute;
+      top: 12px;
+    
+      right: calc(50% + 20px);
+      left: calc(-50% + 20px);
+      //content
+      background-color: basic_setting.$light-gray;
+    }
+    
+    //circle color & checked logo
+    &.checked, &.active {
+      .circle-container {
+        //content
+        background-color: basic_setting.$freedom-blue;
+        color: basic_setting.$body-color;
+      }
+    }
+
+    &.checked .circle-container::after{
+      content:"\2714"
+    }
+  }
+}
+
+// form-panel
+.form-panel{
+  //block
+  padding: 32px 0;
+  flex: 1;
+  overflow-y: scroll;
+  //content
+  @extend %standard-boxshadow;
+  background-color: basic_setting.$white;
+
+  .form-container{
+    //block
+    height: 100%;
+
+    form{
+      //positioning
+      display: flex;
+      flex-direction: column;
+      //block
+      height: 100%;
+
+      .form-content{
+        flex: 1;
+
+      }
+    }
+  }
+
+  .terms-content{
+    //block
+    max-height: 300px;
+    overflow-y: scroll;
+    padding: 16px;
+    border: 1px solid basic_setting.$light-gray;
+    border-radius: 5px;
+  }
+
+  .form-row{
+    //block
+    margin-bottom: 24px;
+
+  //共用樣式設定
+  [type="checkbox"], [type="radio"], [type="date"], select{
+    //animation
+      cursor: pointer;
+  }
+
+  //單一樣式設定
+    >label{
+      //positioning
+      display: block;
+      //block
+      margin-bottom: 6px;
+      //content
+      font-weight: 600;
+    }
+
+    input, select{
+      @extend %input-style;
+    }
+
+    [type="checkbox"] {
+      //取消預設樣式
+      -webkit-appearance: none;
+      //positioning
+      position: relative;
+      //block
+      margin: 0 3px 0 0;
+      //content
+      border-color: basic_setting.$light-gray;
+      
+      &:checked{
+        //content
+        background-color: basic_setting.$secondary-blue;
+        &::after{
+          content:"\2714";
+          //positioning
+          position: absolute;
+          top: 0;
+          left: 3px;
+          //content
+          color: basic_setting.$white;
+          font-size: 12px;
+        }
+      }
+
+      ~label {
+        //positioning
+        display: inline-block;
+        //block
+        margin: 0;
+        //content
+        font-weight: normal;
+      }
+    }
+
+    [type="radio"] {
+      //取消預設樣式
+      -webkit-appearance: none;
+      //block
+      border-radius: 50%;
+      &~label{
+        margin-right: 20px;
+      }
+      
+      &:checked{
+        box-shadow: inset 0 0 0 5px basic_setting.$secondary-blue;
+      }
+
+    }
+
+    [type="date"]{
+      &:invalid{
+        color: basic_setting.$font-grey;
+      }
+    }
+
+    [type="number"]{
+      width: 60px;
+    }
+
+    select {
+      //取消預設樣式
+      -webkit-appearance: none;
+      //重新設定樣式
+      @extend %input-style;
+      //block
+      width: 100%;
+      //content
+      background-color: transparent;
+      //animation
+      &:invalid{
+        color: basic_setting.$font-grey;
+      }
+
+    }
+
+    .select-wrapper{
+      //positioning
+      position: relative;
+      z-index: 0;
+      //block
+      width: 25%;
+      //animation
+      &::after{
+        //positioning
+        position: absolute;
+        z-index: -1;
+        //block
+        top: 50%;
+        right: 8px;
+        transform: translateY(-50%);
+        //content
+        content: "\25BE";
+        color:basic_setting.$light-gray;
+      }
+    }
+
+    textarea{
+      @extend %input-style;
+      //block
+      resize: none;
+      overflow-y: scroll;
+    }
+  }
+
+  //btn-control
+  .btn {
+    //block
+    padding: 0 16px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #a6a6a6;
+    //content
+    font-size: 16px;
+    height: 32px;
+    //animation
+    &:hover{
+      //block
+      box-shadow: 1px 1px 5px basic_setting.$dark-gray;
+    }
+
+    &.btn-primary{
+      //content
+      color: basic_setting.$white;
+      background-color: basic_setting.$secondary-blue;
+    }
+
+    &.btn-outline{
+      //content
+      color: basic_setting.$dark-gray;
+    }
+
+    &[disabled]{
+      //content
+      opacity: 0.5;
+    }
+
+  }
+}
+
